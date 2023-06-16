@@ -12,7 +12,8 @@
     <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6">      
       <div class="bg-white">
         <div>
-          <h3 class="text-lg font-medium text-warm-gray-900">Liste des commentaires</h3>          
+          <h3 class="text-lg font-medium text-warm-gray-900">Liste des commentaires</h3> 
+
           <!-- COMMENTS  -->
           <div id="comment-list" class="-my-4">
                         
@@ -48,6 +49,7 @@
       </div>
       <div class="py-10 lg:col-span-2 xl:py-12">
         <h3 class="text-lg font-medium text-warm-gray-900">Écrire un commentaire</h3>
+
         <!-- ALERT MESSAGE -->
         <div id="error-message" style="display: none;" class="mt-4 mx-auto max-w-4xl">        
           <div class="rounded-md bg-red-50 p-4">
@@ -63,6 +65,7 @@
             </div>
           </div>          
         </div>
+
         <!-- FORM  -->
         <form action="#" method="POST" class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
           <div>
@@ -95,6 +98,81 @@
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Script -->
+  <script>
+    const button = document.querySelector("button");
+    button.addEventListener("click", preventSubmit, false);
+
+    function preventSubmit(event) {
+      event.preventDefault();
+    }
+
+    // verify if there's data in input fields
+
+    button.addEventListener("click", checkData, false);
+
+    function checkData() {
+      const firstNameInput = document.getElementById("first-name");
+      const lastNameInput = document.getElementById("last-name");
+      const textAreaInput = document.getElementById("message");
+      const errorMessage = document.getElementById("error-message");
+
+      if (!firstNameInput.value || !lastNameInput.value || !textAreaInput.value) {
+        errorMessage.style.display = "block";
+      } else {
+        errorMessage.style.display = "none";
+      }
+    }
+    
+    button.addEventListener("click", addComment, false) 
+
+    function addComment() {
+      const firstNameInput = document.getElementById("first-name");
+      const lastNameInput = document.getElementById("last-name");
+      const textAreaInput = document.getElementById("message");
+      const commentarySection = document.getElementById("comment-list");
+
+      let commentaryBox = document.createElement("div");
+      let borderBox = document.createElement("div");
+      let nameTitle = document.createElement("h3");
+      let textHolder = document.createElement("div");
+      let text = document.createElement("p");
+
+      commentaryBox.classList.add("flex", "space-x-4", "text-sm", "text-gray-500");
+      borderBox.classList.add("flex-1", "py-10", "border-t", "border-gray-200");
+      nameTitle.classList.add("font-medium", "text-gray-900");
+      textHolder.classList.add("prose", "prose-sm", "mt-4", "max-w-none", "text-gray-500");
+
+      commentaryBox.append(borderBox);
+      borderBox.append(nameTitle);
+      borderBox.append(textHolder);
+      textHolder.append(text);
+      
+      
+
+      commentarySection.append(commentaryBox);
+
+      console.log(firstNameInput.value)
+      nameTitle.textContent = firstNameInput.value + " " + lastNameInput.value;
+      text.textContent = textAreaInput.value;
+    }
+
+
+    button.addEventListener("click", clearInput, false);
+
+    function clearInput() {
+      const firstNameInput = document.getElementById("first-name");
+      const lastNameInput = document.getElementById("last-name");
+      const textAreaInput = document.getElementById("message");
+
+      firstNameInput.value = "";
+      lastNameInput.value= "";
+      textAreaInput.value= "";
+
+    }
+    
+    
+  </script>
 </body>
 </html>
