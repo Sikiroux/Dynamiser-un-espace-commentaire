@@ -109,15 +109,25 @@
     }
 
     // verify if there's data in input fields
-    
 
     button.addEventListener("click", checkData, false);
 
-    checkData() {
+    function checkData() {
+      const firstNameInput = document.getElementById("first-name");
+      const lastNameInput = document.getElementById("last-name");
+      const textAreaInput = document.getElementById("message");
+      const errorMessage = document.getElementById("error-message");
 
+      if (!firstNameInput.value || !lastNameInput.value || !textAreaInput.value) {
+        errorMessage.style.display = "block";
+      } else {
+        errorMessage.style.display = "none";
+      }
     }
+    
 
-
+    
+    
   </script>
 </body>
 </html>
